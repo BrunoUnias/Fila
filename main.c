@@ -1,40 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAMANHO_MAXIMO 100
+#define TAMANHO 100
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
 typedef struct queue{
-	int itens[TAMANHO_MAXIMO];
+	int itens[TAMANHO];
 	int front,rear;
 	
-};
+}queue;
 
-int vazia(struct queue *pq){
+int vazia(queue *pq){
 	if(pq->front == pq->rear){
-		printf("\nFila vazia");
+		printf("Fila vazia");
 		return 1;
+		
 	}
 	return 0;
 	
 }
 
-
-int insere(struct queue *pq,int x){
-	if(pq->rear + 1 >= TAMANHO_MAXIMO){
-		printf("\nEstouro da capacidade da fila");
-		return 1;
+int insere(queue *pq,int x){
+	if(pq->rear + 1 >= TAMANHO){
+		printf("Estouro na capacidade da fila");
+		
 	}
-	pq->itens[pq->rear++] = x;
+	else{
+		pq->itens[pq->rear++] = x;
+		
+	}
 	return 0;
 	
 }
 
-int fila_remove(struct queue *pq){
+int fila_remove(queue *pq){
 	int v;
 	if(vazia(pq)){
-		printf("\nFila vazia");
-		return 1;
+		vazia(pq);
+		
 	}
 	v = pq->itens[pq->front];
 	pq->front = pq->rear;
@@ -42,28 +44,29 @@ int fila_remove(struct queue *pq){
 	
 }
 
-int size(struct queue *pq){
+int size(queue *pq){
 	return pq->front - pq->rear + 1;
 	
 }
 
-int front(struct queue *pq){
+int front(queue *pq){
 	return pq->front;
 	
 }
 
+
 int main() {
-	struct queue *pq;
 	int opcao;
-	int x;
-	while(opcao){
-		printf("1-vazia\n2-inserir\n3-remove\n4-size\n5-front\n");
+	queue *pq;
+		printf("1-vazia\n2-insere\n3-remove\n4-size\n5-front");
 		scanf("%d",&opcao);
+	while(opcao != 0){
 		if(opcao == 1){
 			printf(vazia(pq));
 			
 		}
-	}
 		
+	}
+	
 	return 0;
 }
